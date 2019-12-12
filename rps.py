@@ -45,7 +45,7 @@ def updateCb(client, callback_query,redis):
   username = callback_query.from_user.username
   chatID = callback_query.message.chat.id
   message_id = callback_query.message.message_id
-  if re.search("rps.py",date):
+  if re.search("rps.pyplay",date):
     start = """✂️꒐ حجره ورقه مقص
 👤꒐ اضغط للعب مع ({})""".format(userFN)
     kb = InlineKeyboardMarkup([[InlineKeyboardButton("العب", callback_data="rps="+str(userID))]])
