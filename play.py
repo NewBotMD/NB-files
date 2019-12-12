@@ -33,7 +33,7 @@ def updateMsgs(client, message,redis):
       return False
     for f in onlyfiles:
       if f in games:
-        array.append([InlineKeyboardButton(games[f],callback_data=f)])
+        array.append([InlineKeyboardButton(games[f],callback_data=f+"play")])
     kb = InlineKeyboardMarkup(array)
     Bot("sendMessage",{"chat_id":chatID,"text":tx,"reply_to_message_id":message.message_id,"parse_mode":"html","disable_web_page_preview":True,"reply_markup":kb})
 
