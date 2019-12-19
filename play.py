@@ -24,7 +24,7 @@ def updateMsgs(client, message,redis):
   title = message.chat.title
   rank = isrank(redis,userID,chatID)
   text = message.text
-  games = {"rps.py":"🧱📃✂️"}
+  games = {"rps.py":"🧱📃✂️","xo.py":"❌ ⭕️"}
   if text and re.search("^الالعاب$|^العاب$",text):
     tx = "🕹꒐ اليك الالعاب المقدمه من (<a href=\"http://t.me/nbbot\">NewBot</a>)"
     onlyfiles = [f for f in listdir("files") if isfile(join("files", f))]
