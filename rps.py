@@ -39,6 +39,8 @@ def updateMsgs(client, message,redis):
 
 
 def updateCb(client, callback_query,redis):
+  if callback_query.inline_message_id:
+    return False
   date = callback_query.data
   userID = callback_query.from_user.id
   userFN = callback_query.from_user.first_name
