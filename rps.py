@@ -122,13 +122,13 @@ def updateCb(client, callback_query,redis):
         us = userFn
         usin = user1
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),usin,5)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("📣",url="t.me/nbbot")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rps.pyplay")]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go2.format(emj(ch1),userFn,emj(ch2),userFN, us),"disable_web_page_preview":True,"reply_markup":kb})
 
     elif winer == "tie":
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),user1,2)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),user2,2)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("📣",url="t.me/nbbot")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rps.pyplay")]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format(emj(ch1),userFn,emj(ch2),userFN),"disable_web_page_preview":True,"reply_markup":kb})
 
 
