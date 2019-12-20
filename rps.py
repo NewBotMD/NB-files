@@ -53,6 +53,17 @@ def updateCb(client, callback_query,redis):
     kb = InlineKeyboardMarkup([[InlineKeyboardButton("العب", callback_data="rps="+str(userID))]])
     Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":start,"disable_web_page_preview":True,"reply_markup":kb})
 
+  if re.search("rer=",date):
+    tx = callback_query.message.text
+    p1 = date.split("=")[1]
+    if userID == int(p1):
+      start = """✂️꒐ حجره ورقه مقص
+👤꒐ اضغط للعب مع ({})""".format(userFN)
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("العب", callback_data="rps="+str(userID))]])
+      Bot("sendMessage",{"chat_id":chatID,"text":start,"disable_web_page_preview":True,"reply_markup":kb})
+      Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":tx,"disable_web_page_preview":True})
+    else:
+      Bot("answerCallbackQuery",{"callback_query_id":callback_query.id,"text":"عذراً اللعبه ليست لك","show_alert":True})
 
 
   go = """{}꒐ اللاعب الاول :- ({})
@@ -122,13 +133,13 @@ def updateCb(client, callback_query,redis):
         us = userFn
         usin = user1
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),usin,5)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rps.pyplay")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rer={}".format(user1))]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go2.format(emj(ch1),userFn,emj(ch2),userFN, us),"disable_web_page_preview":True,"reply_markup":kb})
 
     elif winer == "tie":
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),user1,2)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),user2,2)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rps.pyplay")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rer={}".format(user1))]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format(emj(ch1),userFn,emj(ch2),userFN),"disable_web_page_preview":True,"reply_markup":kb})
 
 
