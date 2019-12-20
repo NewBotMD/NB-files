@@ -183,20 +183,20 @@ def updateCb(client, callback_query,redis):
       if xRo == 1:
         fn1,fn2 = get(client,userID,userFN,p1,p2)
         redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p1,10)
-        kb = InlineKeyboardMarkup([[InlineKeyboardButton("📣",url="t.me/nbbot")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
         Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format("❌",fn1,"⭕️",fn2,fn1)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
         return False
       if xRo == 2:
         fn1,fn2 = get(client,userID,userFN,p1,p2)
         redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p2,10)
-        kb = InlineKeyboardMarkup([[InlineKeyboardButton("📣",url="t.me/nbbot")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
         Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format("❌",fn1,"⭕️",fn2,fn2)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
         return False
     if xRo == "tie":
       fn1,fn2 = get(client,userID,userFN,p1,p2)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p1,3)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p2,3)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("📣",url="t.me/nbbot")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go2.format("❌",fn1,"⭕️",fn2)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
       return False
     
