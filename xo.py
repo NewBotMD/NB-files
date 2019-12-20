@@ -95,6 +95,19 @@ def updateCb(client, callback_query,redis):
 {}꒐ ({})
 
 🔴꒐ تعادل"""
+  if re.search("rex=",date):
+    tx = callback_query.message.text
+    p1 = date.split("=")[1]
+    if userID == int(p1):
+      start = """👋🏻꒐ ❌⭕️
+👤꒐ اضغط للعب مع ({})""".format(userFN)
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("العب", callback_data="xo="+str(userID))]])
+      Bot("sendMessage",{"chat_id":chatID,"text":start,"disable_web_page_preview":True,"reply_markup":kb})
+      Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":tx,"disable_web_page_preview":True})
+    else:
+      Bot("answerCallbackQuery",{"callback_query_id":callback_query.id,"text":"عذراً اللعبه ليست لك","show_alert":True})
+
+
   if re.search("^xo.pyplay$",date):
     start = """👋🏻꒐ ❌⭕️
 👤꒐ اضغط للعب مع ({})""".format(userFN)
@@ -183,20 +196,20 @@ def updateCb(client, callback_query,redis):
       if xRo == 1:
         fn1,fn2 = get(client,userID,userFN,p1,p2)
         redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p1,10)
-        kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
+        kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rex={}".format(p1))]])
         Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format("❌",fn1,"⭕️",fn2,fn1)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
         return False
       if xRo == 2:
         fn1,fn2 = get(client,userID,userFN,p1,p2)
         redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p2,10)
-        kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
+        kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rex={}".format(p1))]])
         Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go3.format("❌",fn1,"⭕️",fn2,fn2)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
         return False
     if xRo == "tie":
       fn1,fn2 = get(client,userID,userFN,p1,p2)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p1,3)
       redis.hincrby("{}Nbot:{}:points".format(BOT_ID,chatID),p2,3)
-      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="xo.pyplay")]])
+      kb = InlineKeyboardMarkup([[InlineKeyboardButton("اللعب مجدداً",callback_data="rex={}".format(p1))]])
       Bot("editMessageText",{"chat_id":chatID,"message_id":message_id,"text":go2.format("❌",fn1,"⭕️",fn2)+"\n"+kbtotx(tb),"disable_web_page_preview":True,"reply_markup":kb})
       return False
     
