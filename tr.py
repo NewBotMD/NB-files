@@ -55,7 +55,7 @@ def updateMsgs(client, message,redis):
         redis.sadd("{}Nbot:Ltag".format(BOT_ID),gp)
       if redis.get(BOT_ID+"Tshake:Lock:edit"+gp):
         redis.sadd("{}Nbot:Ledits".format(BOT_ID),gp)
-      if redis.get(BOT_ID+"Tshake:flooding:settings:"+gp):
+      if redis.hget(BOT_ID+"Tshake:flooding:settings:"+gp,"flood"):
         redis.sadd("{}Nbot:Lflood".format(BOT_ID),gp)
       if redis.get(BOT_ID+"Tshake:Lock:Animation"+gp):
         redis.sadd("{}Nbot:Lgifs".format(BOT_ID),gp)
